@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'preetham777/ultimate-cicd-pipeline:v1'
+      image 'preetham777/ultimate-cicd-pipeline:v2'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
@@ -32,7 +32,7 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "preetham777/ultimate-cicd-pipeline:v1:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "preetham777/ultimate-cicd-pipeline:v2:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
