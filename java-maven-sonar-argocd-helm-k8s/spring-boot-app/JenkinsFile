@@ -32,7 +32,7 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "preetham777/ultimate-cicd-pipeline:v2:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "preetham777/ultimate-cicd-pipeline:v2"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
@@ -64,4 +64,5 @@ pipeline {
     }
   }
 }
+
 
