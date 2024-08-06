@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'preetham777/ultimate-cicd-pipeline:version2'
+      image 'preetham777/ultimate-cicd-pipeline:v1' // Updated Docker image
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
@@ -22,7 +22,7 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://54.226.4.215:9000"
+        SONAR_URL = "http://54.197.94.178/:9000" // Ensure this is the correct URL
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
@@ -32,7 +32,7 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "preetham777/ultimate-cicd-pipeline:version2"
+        DOCKER_IMAGE = "preetham777/ultimate-cicd-pipeline:${BUILD_NUMBER}" // Use dynamic tag with build number
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
       steps {
@@ -64,5 +64,6 @@ pipeline {
     }
   }
 }
+
 
 
